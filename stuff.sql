@@ -1,43 +1,35 @@
-select value
-from V$PARAMETER
-where name = 'audit_trail';
-
 -- enable audit
-alter system set audit_trail=db,extended scope = spfile;
+ALTER SYSTEM SET audit_trail=db,extended SCOPE = SPFILE;
+
+SELECT value
+FROM v$parameter
+WHERE name = 'audit_trail';
+
+-- -- sql+
+-- sqlplus / as sysdba
+-- shutdown immediate
+-- sqlplus / as sysdba
+-- startup
 
 
-select *
-from DBA_AUDIT_TRAIL;
-select *
-from dba_AUDIT_TRAIL;
+SELECT *
+FROM dba_audit_trail;
+
+ALTER SESSION SET "_ORACLE_SCRIPT"= TRUE;
+CREATE USER matei_admin IDENTIFIED BY password_test;
+GRANT CREATE SESSION TO matei_admin;
+GRANT CREATE TABLE TO matei_admin;
+GRANT CREATE VIEW TO matei_admin;
+GRANT CREATE SEQUENCE TO matei_admin;
+GRANT UNLIMITED TABLESPACE TO matei_admin;
+GRANT CREATE PROCEDURE TO matei_admin;
+GRANT EXECUTE ANY PROCEDURE TO matei_admin;
+GRANT CREATE TRIGGER TO matei_admin;
 
 
-select *
-from dual;
-select *
-from ALL_POLICIES;
+
+SELECT *
+FROM sys.dba_users;
 
 
-select *
-from new_table;
-
-select *
-from sys.AUD$;
-
-
-audit table by system;
-
-select *
-from ALL_TRIGGERS;
-
-select user
-from dual;
-
-SELECT banner
-FROM v$version
-WHERE ROWNUM = 1;
-
-select * from dba_users;
-
-SELECT substr(grantee,1,20) grantee, owner, substr(table_name,1,15) table_name, grantor,privilege
-FROM DBA_TAB_PRIVS;
+AUDIT TABLE BY matei_admin;
